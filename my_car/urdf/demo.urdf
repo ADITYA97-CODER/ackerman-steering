@@ -1,0 +1,411 @@
+<?xml version="1.0"?>
+<robot name="robot" xmlns:xacro="http://ros.org/wiki/xacro">
+
+
+
+
+<link name="base_link">
+    <visual>
+
+      <origin rpy="1.57 1.57 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="1" radius="0.05"/>
+      </geometry>
+  </visual>
+    <collision>
+       <origin rpy="1.57 1.57 0" xyz="0 0 0"/>
+<geometry>
+        <cylinder length="1" radius="0.05"/>
+      </geometry>
+</collision><inertial>
+      <mass value="20" />
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+    </inertial>
+  </link>
+
+
+
+   <link name="jointer1">
+    <visual>
+      <origin rpy="0 1.57 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.6" radius="0.05"/>
+      </geometry>
+</visual>
+<collision>
+   <origin rpy="0 1.57 0" xyz="0 0 0"/>
+<geometry>
+        <cylinder length="0.6" radius="0.05"/>
+      </geometry>
+</collision>
+<inertial>
+      <mass value="10" />
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+    </inertial>
+  </link>
+
+
+  <joint name="base_link_to_jointer" type="fixed">
+    <parent link="base_link"/>
+    <child link="jointer1"/>
+    <origin xyz="0 0.5 0"/>
+  </joint>
+
+
+
+   <link name="jointer2">
+    <visual>
+
+      <origin rpy="0 1.57 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.6" radius="0.05"/>
+      </geometry>
+
+    
+    </visual>
+    <collision>
+      <origin rpy="0 1.57 0" xyz="0 0 0"/>
+<geometry>
+        <cylinder length="0.6" radius="0.05"/>
+      </geometry>
+</collision>
+<inertial>
+      <mass value="10" />
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+    </inertial>
+  </link>
+
+
+   <joint name="jointer2_to_base_link" type="fixed">
+    <parent link="base_link"/>
+    <child link="jointer2"/>
+    <origin xyz="0 -0.5 0"/>
+  </joint>
+    <link name="axel1">
+    <visual>
+      <origin rpy="0 1.57 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+
+    
+    </visual>
+<collision>
+   <origin rpy="0 1.57 0" xyz="0 0 0"/>
+<geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+</collision>
+<inertial>
+      <mass value="2.5" />
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+    </inertial>
+  </link>
+     <joint name="axel1_to_jointer1" type="revolute">
+       <limit effort="1.0" upper="1.0" lower="-1.0" velocity="2" />
+
+        <axis xyz="0 0 1" rpy="0 0 0"/>
+        
+    <parent link="jointer1"/>
+    <child link="axel1"/>
+    <origin xyz="0.4 0 0" rpy="0 0 0"/>
+  </joint>
+     <joint name="wheel1_to_axel1" type="continuous">
+         <axis xyz="1 0 0" rpy="0 0 0"/>
+        
+    <parent link="axel1"/>
+    <child link="wheel1"/>
+    <origin xyz="0.1 0 0"/>
+  </joint>
+  
+  
+
+
+
+  <link name="wheel1">
+    <visual>
+      <origin rpy="0 1.57 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.2" radius="0.2"/>
+      </geometry>
+
+    
+    </visual>
+<collision>
+   <origin rpy="0 1.57 0" xyz="0 0 0"/>
+<geometry>
+        <cylinder length="0.2" radius="0.2"/>
+      </geometry>
+</collision>
+<inertial>
+      <mass value="5" />
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+    </inertial>
+  </link>
+  
+   <!-- <joint name="wheel1_to_jointer1" type="continuous">
+        <axis xyz="1 0 0" rpy="0 0 0"/>
+        
+    <parent link="jointer1"/>
+    <child link="wheel1"/>
+    <origin xyz="0.4 0 0"/>
+  </joint>-->
+  
+
+
+  <link name="wheel_2">
+    <visual>
+
+      <origin rpy="0 1.57 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.2" radius="0.2"/>
+      </geometry>
+
+    
+    </visual>
+<collision>
+  <origin rpy="0 1.57 0" xyz="0 0 0"/>
+<geometry>
+        <cylinder length="0.2" radius="0.2"/>
+      </geometry>
+</collision>
+
+<inertial>
+      <mass value="5" />
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+    </inertial>
+  </link>
+ 
+
+ <link name="axel2">
+    <visual>
+      <origin rpy="0 1.57 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+
+    
+    </visual>
+<collision>
+   <origin rpy="0 1.57 0" xyz="0 0 0"/>
+<geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+</collision>
+<inertial>
+      <mass value="2.5" />
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+    </inertial>
+  </link>
+
+
+<joint name="axel2_to_jointer1" type="revolute">
+       <limit effort="1.0" upper="1.0" lower="-1.0" velocity="2" />
+  <axis xyz="0 0 1" rpy="0 0 0"/>
+        
+    <parent link="jointer1"/>
+    <child link="axel2"/>
+    <origin xyz="-0.4 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="wheel2_to_axel2" type="continuous">
+     <axis xyz="1 0 0" rpy="0 0 0"/>
+        
+    <parent link="axel2"/>
+    <child link="wheel_2"/>
+    <origin xyz="-0.1 0 0"/>
+  </joint>
+  
+ 
+   
+
+  <link name="wheel_3">
+    <visual>
+
+      <origin rpy="0 1.57 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.2" radius="0.2"/>
+      </geometry>
+
+    
+    </visual>
+<collision>
+  <origin rpy="0 1.57 0" xyz="0 0 0"/>
+<geometry>
+        <cylinder length="0.2" radius="0.2"/>
+      </geometry>
+</collision>
+
+<inertial>
+      <mass value="5" />
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+    </inertial>
+  </link>
+
+   <joint name="wheel3_to_jointer2" type="continuous">
+     <axis xyz="1 0 0" rpy="0 0 0"/>
+    <parent link="jointer2"/>
+    <child link="wheel_3"/>
+    <origin xyz="0.4 0 0"/>
+  </joint>
+
+
+   <link name="wheel_4">
+    <visual>
+
+      <origin rpy="0 1.57 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.2" radius="0.2"/>
+      </geometry>
+
+    
+    </visual>
+<collision>
+   <origin rpy="0 1.57 0" xyz="0 0 0"/>
+<geometry>
+        <cylinder length="0.2" radius="0.2"/>
+      </geometry>
+</collision>
+
+<inertial>
+      <mass value="5" />
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+    </inertial>
+  </link>
+
+
+ <joint name="wheel4_to_jointer2" type="continuous">
+     <axis xyz="1 0 0" rpy="0 0 0"/>
+    <parent link="jointer2"/>
+    <child link="wheel_4"/>
+    <origin xyz="-0.4 0 0"/>
+  </joint>
+<gazebo reference="wheel1">
+		<material>Gazebo/Black</material>
+		<kp>1000000.0</kp> <!-- kp and kd for rubber -->
+		<kd>100.0</kd>
+		<mu1>1.0</mu1>
+		<mu2>1.0</mu2>
+		<maxVel>1.0</maxVel>
+		<minDepth>0.00</minDepth>
+	</gazebo>
+
+	<gazebo reference="wheel_2">
+		<material>Gazebo/Black</material>
+		<kp>1000000.0</kp> <!-- kp and kd for rubber -->
+		<kd>100.0</kd>
+		<mu1>1.0</mu1>
+		<mu2>1.0</mu2>
+		<maxVel>1.0</maxVel>
+		<minDepth>0.00</minDepth>
+	</gazebo>
+
+	<gazebo reference="wheel_3">
+		<material>Gazebo/Black</material>
+		<kp>1000000.0</kp> <!-- kp and kd for rubber -->
+		<kd>100.0</kd>
+		<mu1>1.0</mu1>
+		<mu2>1.0</mu2>
+		<maxVel>1.0</maxVel>
+		<minDepth>0.00</minDepth>
+	</gazebo>
+	<gazebo reference="wheel_4">
+		<material>Gazebo/Black</material>
+		<kp>1000000.0</kp> <!-- kp and kd for rubber -->
+		<kd>100.0</kd>
+		<mu1>1.0</mu1>
+		<mu2>1.0</mu2>
+		<maxVel>1.0</maxVel>
+		<minDepth>0.00</minDepth>
+	</gazebo>
+<gazebo reference="base_link">
+		<material>Gazebo/Red</material>
+		<kp>1000000.0</kp> <!-- kp and kd for rubber -->
+		<kd>100.0</kd>
+		<mu1>1.0</mu1>
+		<mu2>1.0</mu2>
+		<maxVel>1.0</maxVel>
+		<minDepth>0.00</minDepth>
+	</gazebo>
+<gazebo reference="jointer1">
+		<material>Gazebo/Red</material>
+		<kp>1000000.0</kp> <!-- kp and kd for rubber -->
+		<kd>100.0</kd>
+		<mu1>1.0</mu1>
+		<mu2>1.0</mu2>
+		<maxVel>1.0</maxVel>
+		<minDepth>0.00</minDepth>
+	</gazebo>
+<gazebo reference="jointer2">
+		<material>Gazebo/Red</material>
+		<kp>1000000.0</kp> <!-- kp and kd for rubber -->
+		<kd>100.0</kd>
+		<mu1>1.0</mu1>
+		<mu2>1.0</mu2>
+		<maxVel>1.0</maxVel>
+		<minDepth>0.00</minDepth>
+	</gazebo>
+    <gazebo>
+
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/joint_controll</robotNamespace>
+    </plugin>
+  </gazebo>
+<gazebo>
+    
+    <plugin name="skid_steer_drive_controller" filename="libgazebo_ros_skid_steer_drive.so">
+      <updateRate>10.0</updateRate>
+      <robotNamespace>/</robotNamespace>
+      <leftFrontJoint>wheel1_to_axel1</leftFrontJoint>
+      <rightFrontJoint>wheel2_to_axel2</rightFrontJoint>
+      <leftRearJoint>wheel3_to_jointer2</leftRearJoint>
+      <rightRearJoint>wheel4_to_jointer2</rightRearJoint>
+      <wheelSeparation>0.4</wheelSeparation>
+      <wheelDiameter>0.2</wheelDiameter>
+      <robotBaseFrame>robot_footprint</robotBaseFrame>
+      <torque>10</torque>
+
+      <topicName>cmd_vel</topicName>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+
+      <commandTopic>cmd_vel</commandTopic>
+      <topic_name_twist>cmd_vel</topic_name_twist>
+      <topic_name_odometry>odom</topic_name_odometry>
+      <topic_name_joint>joint</topic_name_joint>
+
+      <broadcastTF>true</broadcastTF>
+
+      <covariance_x>0.0001</covariance_x>
+      <covariance_y>0.0001</covariance_y>
+      <covariance_yaw>0.01</covariance_yaw>
+
+    </plugin>
+
+  </gazebo>
+
+
+
+
+
+
+   <transmission name="wheels_controll1">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="motor1">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="axel1_to_jointer1">
+      <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+ <transmission name="wheels_controll2">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="motor2">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="axel2_to_jointer1">
+      <hardwareInterface>PositionJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+
+</robot>

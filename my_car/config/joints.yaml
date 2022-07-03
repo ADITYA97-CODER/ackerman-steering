@@ -1,0 +1,22 @@
+# The joint state controller handles publishing transforms for any moving joints
+
+joint_controll:
+  joint_state_controller:
+               type: joint_state_controller/JointStateController
+               publish_rate: 20
+  wheel_controller1:
+             type: position_controllers/JointPositionController
+             joint: axel1_to_jointer1
+             pid_gains:
+               axel1_to_jointer1:
+                  p: 10.0
+                  i: 0.01 
+                  d: 10.0
+  wheel_controller2:
+             type: position_controllers/JointPositionController
+             joint: axel2_to_jointer1
+             pid_gains:
+               axel2_to_jointer1:
+                  p: 10.0
+                  i: 0.01 
+                  d: 10.0

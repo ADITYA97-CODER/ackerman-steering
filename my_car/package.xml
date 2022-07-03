@@ -1,0 +1,21 @@
+<package>
+  <name>my_car</name>
+  <version>0.5.0</version>
+
+  <description>fixed car model.</description>
+  <author email="oaditya97@gmail.com">Aditya</author>
+
+  <maintainer email="oaditya97@gmail.com">Aditya</maintainer>
+
+  <license>BSD</license>
+  <url>http://ros.org/wiki/urdf_tutorial</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>roslaunch</build_depend>
+  <run_depend>joint_state_publisher</run_depend>
+  <run_depend>joint_state_publisher_gui</run_depend>
+  <run_depend>robot_state_publisher</run_depend>
+  <run_depend>rviz</run_depend>
+  <run_depend>xacro</run_depend>
+
+</package>

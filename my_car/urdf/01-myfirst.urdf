@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<robot name="robot" xmlns:xacro="http://ros.org/wiki/xacro">
+
+
+
+
+<link name="base_link">
+    <visual>
+
+      <origin rpy="1.57 1.57 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="1" radius="0.05"/>
+      </geometry>
+  </visual>
+    <collision>
+       <origin rpy="1.57 1.57 0" xyz="0 0 0"/>
+<geometry>
+        <cylinder length="1" radius="0.05"/>
+      </geometry>
+</collision><inertial>
+      <mass value="10" />
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+    </inertial>
+  </link>
+
+
+
+   <link name="jointer1">
+    <visual>
+      <origin rpy="0 1.57 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.6" radius="0.05"/>
+      </geometry>
+</visual>
+<collision>
+   <origin rpy="0 1.57 0" xyz="0 0 0"/>
+<geometry>
+        <cylinder length="0.6" radius="0.05"/>
+      </geometry>
+</collision>
+<inertial>
+      <mass value="1" />
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+    </inertial>
+  </link>
+
+
+  <joint name="base_link_to_jointer" type="fixed">
+    <parent link="base_link"/>
+    <child link="jointer1"/>
+    <origin xyz="0 0.5 0"/>
+  </joint>
+
+
+
+   <link name="jointer2">
+    <visual>
+
+      <origin rpy="0 1.57 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.6" radius="0.05"/>
+      </geometry>
+
+    
+    </visual>
+    <collision>
+      <origin rpy="0 1.57 0" xyz="0 0 0"/>
+<geometry>
+        <cylinder length="0.6" radius="0.05"/>
+      </geometry>
+</collision>
+<inertial>
+      <mass value="10" />
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+    </inertial>
+  </link>
+
+
+   <joint name="jointer2_to_base_link" type="fixed">
+    <parent link="base_link"/>
+    <child link="jointer2"/>
+    <origin xyz="0 -0.5 0"/>
+  </joint>
+    <link name="axel1">
+    <visual>
+      <origin rpy="0 1.57 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+
+    
+    </visual>
+<collision>
+   <origin rpy="0 1.57 0" xyz="0 0 0"/>
+<geometry>
+        <cylinder length="0.2" radius="0.05"/>
+      </geometry>
+</collision>
+<inertial>
+      <mass value="1" />
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+    </inertial>
+  </link>
+     <joint name="axel1_to_jointer1" type="revolute">
+       <limit effort="1.0" upper="1.57" lower="0.0" velocity="2" />
+
+        <axis xyz="0 0 1" rpy="0 0 0"/>
+        
+    <parent link="jointer1"/>
+    <child link="axel1"/>
+    <origin xyz="0.4 0 0" rpy="0 0 0"/>
+  </joint>
+   
+  
+  
+
+
+
+
+    <gazebo>
+
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/joint_controll</robotNamespace>
+    </plugin>
+  </gazebo>
+
+   <transmission name="wheels_controll">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="motor1">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="axel1_to_jointer1">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+
+</robot>

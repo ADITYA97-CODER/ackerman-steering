@@ -1,0 +1,167 @@
+<?xml version="1.0"?>
+<robot name="robot" xmlns:xacro="http://ros.org/wiki/xacro">
+
+
+  <material name="blue">
+    <color rgba="0 0 0.8 1"/>
+  </material>
+
+ <xacro:macro name="default_inertial" params="mass">
+    <inertial>
+      <mass value="${mass}" />
+      <inertia ixx="1.0" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="1.0" />
+    </inertial>
+  </xacro:macro>
+
+
+  <link name="base_link">
+    <visual>
+      <origin rpy="0 1.57 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.2" radius="0.2"/>
+      </geometry>
+
+    
+    </visual>
+<collision>
+<geometry>
+        <cylinder length="0.2" radius="0.2"/>
+      </geometry>
+</collision>
+
+  </link>
+   <link name="jointer">
+    <visual>
+      <origin rpy="0 1.57 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.6" radius="0.05"/>
+      </geometry>
+<material name="blue"/>
+    
+    </visual>
+<collision>
+<geometry>
+        <cylinder length="0.6" radius="0.05"/>
+      </geometry>
+</collision>
+<xacro:default_inertial mass="10"/>
+  </link>
+    <joint name="wheel_to_jointer" type="fixed">
+    <parent link="base_link"/>
+    <child link="jointer"/>
+    <origin xyz="0.4 0 0"/>
+  </joint>
+  <link name="wheel_2">
+    <visual>
+<material name="blue"/>
+      <origin rpy="0 1.57 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.2" radius="0.2"/>
+      </geometry>
+
+    
+    </visual>
+<collision>
+<geometry>
+        <cylinder length="0.2" radius="0.2"/>
+      </geometry>
+</collision>
+
+<xacro:default_inertial mass="10"/>
+  </link>
+  <joint name="wheel2_to_jointer" type="fixed">
+    <parent link="jointer"/>
+    <child link="wheel_2"/>
+    <origin xyz="0.4 0 0"/>
+  </joint>
+  <link name="jointer2">
+    <visual>
+<material name="blue"/>
+      <origin rpy="1.57 1.57 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="1" radius="0.05"/>
+      </geometry>
+
+    
+    </visual>
+    <collision>
+<geometry>
+        <cylinder length="1" radius="0.05"/>
+      </geometry>
+</collision>
+<xacro:default_inertial mass="10"/>
+  </link>
+   <joint name="jointer_to_jointer" type="fixed">
+    <parent link="jointer"/>
+    <child link="jointer2"/>
+    <origin xyz="0 0.5 0"/>
+  </joint>
+   <link name="jointer3">
+    <visual>
+<material name="blue"/>
+      <origin rpy="0 1.57 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.6" radius="0.05"/>
+      </geometry>
+
+    
+    </visual>
+    <collision>
+<geometry>
+        <cylinder length="0.6" radius="0.05"/>
+      </geometry>
+</collision>
+<xacro:default_inertial mass="10"/>
+  </link>
+   <joint name="jointer1_to_jointer2" type="fixed">
+    <parent link="jointer2"/>
+    <child link="jointer3"/>
+    <origin xyz="0 0.5 0"/>
+  </joint>
+  <link name="wheel_3">
+    <visual>
+<material name="blue"/>
+      <origin rpy="0 1.57 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.2" radius="0.2"/>
+      </geometry>
+
+    
+    </visual>
+<collision>
+<geometry>
+        <cylinder length="0.2" radius="0.2"/>
+      </geometry>
+</collision>
+
+<xacro:default_inertial mass="10"/>
+  </link>
+   <joint name="wheel3_to_jointer3" type="fixed">
+    <parent link="jointer3"/>
+    <child link="wheel_3"/>
+    <origin xyz="0.4 0 0"/>
+  </joint>
+   <link name="wheel_4">
+    <visual>
+<material name="blue"/>
+      <origin rpy="0 1.57 0" xyz="0 0 0"/>
+      <geometry>
+        <cylinder length="0.2" radius="0.2"/>
+      </geometry>
+
+    
+    </visual>
+<collision>
+<geometry>
+        <cylinder length="0.2" radius="0.2"/>
+      </geometry>
+</collision>
+
+<xacro:default_inertial mass="10"/>
+  </link>
+ <joint name="wheel4_to_jointer3" type="fixed">
+    <parent link="jointer3"/>
+    <child link="wheel_4"/>
+    <origin xyz="-0.4 0 0"/>
+  </joint>
+</robot>
